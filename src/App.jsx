@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import banner from '../src/assets/taskBanner.jpg'
 import { Link } from 'react-router-dom'
 import TypesOfPeople from './components/TypesOfPeople'
+import Footer from './components/Footer'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         </Link>
       </div>
       <TypesOfPeople></TypesOfPeople>
+      <Footer></Footer>
     </div>
   )
 }

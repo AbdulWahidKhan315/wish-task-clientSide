@@ -1,8 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 import developers from '../assets/developers.jpg'
 const TypesOfPeople = () => {
     return (
         <div className="container mx-auto mb-2">
-            <h1 className="text-center my-20 text-5xl font-mono font-bold text-purple-600">..People, Using our Website..</h1>
+            <h1 className="text-center my-8 lg:my-20 text-3xl md:text-5xl font-mono font-bold text-purple-600">..People, Using our Website..</h1>
             <div className='flex flex-col lg:flex-row my-6 gap-8'>
                 <div className='flex-1 border-r-8 border-r-purple-500'>
                     <h1 className='text-4xl font-serif text-center'><span className='text-purple-600 underline underline-offset-8'>Developers</span> are Highly Encouraged</h1>
@@ -14,30 +15,31 @@ const TypesOfPeople = () => {
                     <img src={developers} alt="" />
                 </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <h1 className='text-5xl font-mono text-purple-500'>Beneficial To..</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div className="text-4xl font-mono py-14 px-10 border-l-8 border-l-purple-500 border-y-2 border-y-yellow-500 rounded-tr-3xl rounded-br-full">
-                    Developers
+                    Bankers
                 </div>
                 <div className="border text-4xl font-mono py-14 px-10 border-l-8 border-l-yellow-500 rounded-tl-full border-y-2 border-y-purple-500 border-r-8 border-r-purple-500">
-                    Developers
+                    Managers
                 </div>
                 <div className="text-4xl font-mono py-14 px-10 border-l-8 border-l-purple-500 border-y-2 border-y-purple-500 rounded-tr-full rounded-br-3xl border-r-8 border-r-yellow-500">
-                    Developers
+                    All Hr's
                 </div>
                 <div className="text-4xl font-mono py-14 px-10 border-l-yellow-500 rounded-bl-full border-r-8 border-r-purple-500 border-y-2 border-y-yellow-500">
-                    Developers
+                    Employee's
                 </div>
                 <div className="text-4xl font-mono py-14 px-10 border-l-8 border-l-purple-500 border-y-2 border-y-yellow-500 rounded-tr-full rounded-br-3xl">
-                    Developers
+                    Engineers
                 </div>
                 <div className="border text-4xl font-mono py-14 px-10 border-l-8 border-l-yellow-500 rounded-bl-full border-y-2 border-y-purple-500 border-r-8 border-r-purple-500">
-                    Developers
+                    Doctors
                 </div>
                 <div className="text-4xl font-mono py-14 px-10 border-l-8 border-l-purple-500 border-y-2 border-y-purple-500 rounded-tr-3xl rounded-br-full border-r-8 border-r-yellow-500">
-                    Developers
+                    Students
                 </div>
                 <div className="text-4xl font-mono py-14 px-10 border-l-yellow-500 rounded-tl-full border-r-8 border-r-purple-500 border-y-2 border-y-yellow-500">
-                    Developers
+                    Teachers
                 </div>
             </div>
         </div>
