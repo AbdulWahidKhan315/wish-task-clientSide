@@ -1,13 +1,54 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import loginImg from '../assets/login.jpg'
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { AuthContext } from "../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const { signIn, googleSignIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    const handleLogin = () =>{
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
 
+        signIn(email, password)
+            .then(() => {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Login Successfully',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
+                navigate(location?.state ? location.state : '/')
+            })
+            .catch(() => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Invalid Email and password! Check your email and password',
+                    icon: 'error',
+                    confirmButtonText: 'Cancel'
+                })
+            })
+    }
+
+    const handleGoogleLogin = () => {
+        googleSignIn()
+            .then(() => {
+                navigate('/')
+            })
+            .catch(err => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: `${err.message}`,
+                    icon: 'error',
+                    confirmButtonText: 'Cancel'
+                })
+            })
     }
 
     return (
@@ -18,6 +59,7 @@ const Login = () => {
                     <div className="text-center lg:text-left">
                         <h1 className="text-5xl font-bold text-white">Login now!</h1>
                         <p className="py-6 font-semibold text-white">Please login in our website. By completing the registration you will get the premium service from our website.</p>
+                        <button onClick={handleGoogleLogin} className='btn text-lg bg-purple-500 text-white border-none hover:bg-purple-800'>Login With Google</button>
                     </div>
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-purple-200 md:ml-36">
                         <form className="card-body" onSubmit={handleLogin}>

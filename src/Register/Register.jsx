@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import registerImg from '../assets/login.jpg'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
+    const { createUser, updateUserProfile, googleSignIn } = useContext(AuthContext)
+    const navigate = useNavigate();
 
     const handleFileChange = (e) => {
         if (e.target.files.length > 0) {
@@ -33,46 +37,23 @@ const Register = () => {
                     const photo = res.data.data.display_url;
                     const email = e.target.email.value;
                     const password = e.target.password.value;
-                    console.log(name,photo,email,password)
-
-                    // createUser(email, password)
-                    //     .then(() => {
-                    //         updateUserProfile(name, photo)
-                    //             .then(() => {
-                    //                 const userInfo = {
-                    //                     name,
-                    //                     photo,
-                    //                     email,
-                    //                     role,
-                    //                     bankAccout,
-                    //                     salary,
-                    //                     designation,
-                    //                     verified: false
-                    //                 }
-                    //                 axiosPublic.post('/allusers', userInfo)
-                    //                     .then(res => {
-                    //                         if (res.data.insertedId) {
-                    //                             Swal.fire({
-                    //                                 position: "top-end",
-                    //                                 icon: "success",
-                    //                                 title: "Register Successfully",
-                    //                                 showConfirmButton: false,
-                    //                                 timer: 1500
-                    //                             });
-                    //                             navigate('/')
-                    //                         }
-                    //                     })
-
-                    //             })
-                    //     })
-                    //     .catch(err => {
-                    //         Swal.fire({
-                    //             title: 'Error!',
-                    //             text: `${err.message}`,
-                    //             icon: 'error',
-                    //             confirmButtonText: 'Cool'
-                    //         })
-                    //     })
+                    
+                    createUser(email,password)
+                    .then((result)=>{
+                        updateUserProfile(name,photo)
+                        .then(()=>{
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Register Successfully",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            navigate('/')
+                        })
+                        console.log(result.user);
+                    })
+                    
                 }
             } catch (error) {
                 console.error(error);
@@ -80,6 +61,21 @@ const Register = () => {
         } else {
             console.error('No file selected');
         }
+    }
+
+    const handleGoogleLogin = () =>{
+        googleSignIn()
+        .then(()=>{
+            navigate('/')
+        })
+        .catch(err => {
+            Swal.fire({
+                title: 'Error!',
+                text: `${err.message}`,
+                icon: 'error',
+                confirmButtonText: 'Cancel'
+            })
+        })
     }
 
     return (
@@ -90,6 +86,7 @@ const Register = () => {
                     <div className="text-center lg:text-left">
                         <h1 className="text-5xl font-bold text-white">Register now!</h1>
                         <p className="py-6 font-semibold text-white">Please register in our website. By completing the registration you will get the premium service from our website.</p>
+                        <button onClick={handleGoogleLogin} className='btn text-lg bg-purple-500 text-white border-none hover:bg-purple-800'>Login With Google</button>
                     </div>
                     <div className="card md:w-full shadow-2xl bg-purple-200 ">
                         <form className="card-body" onSubmit={handleRegister}>
@@ -125,7 +122,7 @@ const Register = () => {
                             </div>
                             <div className="form-control mt-6">
 
-                                <button className="btn bg-purple-500 hover:bg-lime-700 text-white">Register</button>
+                                <button className="btn bg-purple-500 hover:bg-purple-800 text-white">Register</button>
 
                                 <p>Already have any accout? please <Link to="/login" className="font-bold text-blue-600">Login</Link></p>
                             </div>
