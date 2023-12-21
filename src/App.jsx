@@ -2,6 +2,7 @@ import './App.css'
 import Navbar from './components/Navbar'
 import banner from '../src/assets/taskBanner.jpg'
 import { Link } from 'react-router-dom'
+import TypesOfPeople from './components/TypesOfPeople'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
           <button className='btn bg-purple-700 hover:bg-purple-900 text-white text-2xl absolute top-32 left-10 border-2 border-purple-600 shadow-2xl shadow-red-500'>Lets Explore</button>
         </Link>
       </div>
+      <TypesOfPeople></TypesOfPeople>
     </div>
   )
 }
