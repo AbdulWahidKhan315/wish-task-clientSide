@@ -87,7 +87,7 @@ const Navbar = () => {
                             </li>
                             <li role="none" className="flex items-stretch">
                                 <NavLink
-                                    to={'/dashboard'}
+                                    to={'/dashboard/dashboardHome'}
                                     style={({ isActive, isPending, isTransitioning }) => {
                                         return {
                                             fontWeight: isPending ? "bold" : "",
