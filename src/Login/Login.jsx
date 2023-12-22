@@ -39,7 +39,7 @@ const Login = () => {
     const handleGoogleLogin = () => {
         googleSignIn()
             .then(() => {
-                navigate('/')
+                navigate(location?.state ? location.state : '/')
             })
             .catch(err => {
                 Swal.fire({

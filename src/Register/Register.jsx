@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import registerImg from '../assets/login.jpg'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../providers/AuthProvider';
 import Swal from 'sweetalert2';
@@ -11,6 +11,7 @@ const Register = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const { createUser, updateUserProfile, googleSignIn } = useContext(AuthContext)
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleFileChange = (e) => {
         if (e.target.files.length > 0) {
@@ -66,7 +67,7 @@ const Register = () => {
     const handleGoogleLogin = () =>{
         googleSignIn()
         .then(()=>{
-            navigate('/')
+            navigate(location?.state ? location.state : '/')
         })
         .catch(err => {
             Swal.fire({

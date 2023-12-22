@@ -103,24 +103,6 @@ const Navbar = () => {
                                     <span>Dashboard</span>
                                 </NavLink>
                             </li>
-                            <li role="none" className="flex items-stretch">
-                                <NavLink
-                                    to={'/aboutUs'}
-                                    style={({ isActive, isPending, isTransitioning }) => {
-                                        return {
-                                            fontWeight: isPending ? "bold" : "",
-                                            color: isActive ? "green" : "black",
-                                            viewTransitionName: isTransitioning ? "slide" : "",
-                                        };
-                                    }}
-                                    role="menuitem"
-                                    aria-haspopup="false"
-                                    className="flex items-center gap-2 py-4 transition-colors duration-300 focus:outline-none focus-visible:outline-none lg:px-8"
-                                    
-                                >
-                                    <span>About Us</span>
-                                </NavLink>
-                            </li>
                             {
                                 user ? '':<li role="none" className="flex items-stretch">
                                 <NavLink
